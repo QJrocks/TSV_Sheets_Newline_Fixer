@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+/.vs/TSV_Fixer/v17
+/delete/TSV_Fixer/v17
+/TSV_Fixer.sln
