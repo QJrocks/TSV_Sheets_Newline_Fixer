@@ -38,4 +38,9 @@
 /x64/Release
 
 #Compilation artifacts
-/TSV_Fixer/x64/
+/TSV_Fixer/
+
+#Visual studio config files
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
