@@ -1,8 +1,6 @@
 #include <fstream>
 #include <iostream>
-
-//Change this as needed
-constexpr char outfileName[] = "spell_card_commentary.txt";
+#include <string>
 
 int main(int argc, char* argv[]) {
 	if (argc <= 1) {
@@ -11,16 +9,20 @@ int main(int argc, char* argv[]) {
 		return -1;
 	}
 
-	std::ifstream infile(argv[1], std::fstream::binary);
-	std::ofstream outfile(outfileName, std::fstream::trunc | std::fstream::binary);
+	std::string filename = std::string(argv[1]);
+	std::string outfileName = filename;
+	outfileName = outfileName.replace(outfileName.begin() + outfileName.find(".tsv"), outfileName.end(), ".txt");
+	
+	std::wifstream infile(filename, std::fstream::binary);
+	std::wofstream outfile(outfileName, std::fstream::trunc | std::fstream::binary);
 
-	char prevChar = 0;
-	char currentChar = 0;
+	wchar_t prevChar = 0;
+	wchar_t currentChar = 0;
 
 	while (infile && outfile) {
 		infile.read(&currentChar, 1);
-		if (currentChar == 0x20 && prevChar == 0x0D) {
-			currentChar = 0x0A;
+		if (currentChar == L' ' && prevChar == L'\r') {
+			currentChar = L'\n';
 		}
 		prevChar = currentChar;
 
